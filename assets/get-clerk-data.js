@@ -27,7 +27,9 @@ document.addEventListener('DOMContentLoaded', () => {
           labels: [label],
           category: category
         });
-    
+  
+        console.log('Clerk API response:', response); // Add this line to log the response
+  
         if (response === undefined) {
           throw new Error(`Response is undefined. Server responded with ${response.status}`);
         }
@@ -50,9 +52,14 @@ document.addEventListener('DOMContentLoaded', () => {
   
       const productHtml = node.firstElementChild;
       const links = productHtml.querySelectorAll('a');
+      const buttons = productHtml.querySelectorAll('button');
   
       links.forEach(link => {
         link.setAttribute('data-clerk-product-id', id);
+        
+      });
+      buttons.forEach(button => {
+        button.setAttribute('data-clerk-product-id', id);
       });
   
       return productHtml.outerHTML;
